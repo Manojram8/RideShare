@@ -3,28 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="16dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Ride Share"
+        android:text="Booking Confirmation"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/confirmationMessageTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Your ride has been successfully booked!"
+        android:textSize="18sp"
         android:layout_marginTop="20dp" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/doneButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_marginTop="10dp" />
-
+        android:text="Done"
+        android:layout_marginTop="20dp" />
 </LinearLayout>
