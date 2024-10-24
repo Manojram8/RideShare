@@ -1,6 +1,7 @@
 package com.example.rideshare;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -18,6 +19,7 @@ public class SearchRidesActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private ArrayList<Ride> ridesList;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

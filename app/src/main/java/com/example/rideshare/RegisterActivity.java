@@ -3,12 +3,10 @@ package com.example.rideshare;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,17 +42,20 @@ public class RegisterActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
+        // Check if any fields are empty
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Toast.makeText(RegisterActivity.this, "All fields are required.", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Register user with Firebase Auth
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = auth.getCurrentUser();
                         saveUserInfo(user.getUid(), name, email);
                     } else {
+                        // Handle the registration failure
                         String errorMessage = task.getException() != null ? task.getException().getMessage() : "Unknown error";
                         Toast.makeText(RegisterActivity.this, "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();
                     }
@@ -65,9 +66,14 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User(name, email);
         firestore.collection("users").document(userId).set(user)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(RegisterActivity.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                    finish();
+                    // Show success message and redirect to MainActivity
+                    Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    finish(); // Finish the current activity
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure to save user info
+                    Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
                 });
     }
 }

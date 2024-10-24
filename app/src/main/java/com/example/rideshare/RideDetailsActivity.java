@@ -1,5 +1,6 @@
 package com.example.rideshare;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -9,6 +10,7 @@ public class RideDetailsActivity extends AppCompatActivity {
 
     private TextView rideDetailsTextView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
