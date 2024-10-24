@@ -12,16 +12,10 @@
         android:hint="Name" />
 
     <EditText
-        android:id="@+id/editEmailEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email" />
-
-    <EditText
-        android:id="@+id/editGenderEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Gender" />
+        android:id="@+id/editMobileEditText"
+        android:layout_width="378dp"
+        android:layout_height="50dp"
+        android:hint="Mobile" />
 
     <Button
         android:id="@+id/saveButton"

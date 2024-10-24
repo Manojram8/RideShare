@@ -11,13 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private TextView nameTextView, emailTextView, mobileTextView, verificationTextView;
     private ImageView profilePicImageView;
-    private Button signOutButton;
+    private Button signOutButton, editProfileButton;
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
 
@@ -31,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         mobileTextView = findViewById(R.id.mobileTextView);
         verificationTextView = findViewById(R.id.verifiedTextView);
         signOutButton = findViewById(R.id.signOutButton);
+        editProfileButton = findViewById(R.id.editProfileButton);  // New Edit button
 
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -42,13 +44,26 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(new Intent(ProfileActivity.this, MainActivity.class));
             finish();
         });
+
+        editProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void fetchUserProfile() {
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             emailTextView.setText(user.getEmail());
-            // Fetch other user details from Firestore and set to text views
+            firestore.collection("users").document(user.getUid()).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String name = documentSnapshot.getString("name");
+                            String mobile = documentSnapshot.getString("mobile");
+                            nameTextView.setText(name);
+                            mobileTextView.setText(mobile);
+                        }
+                    });
         }
     }
 }

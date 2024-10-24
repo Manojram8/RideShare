@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/rsc"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/rsc"
         android:supportsRtl="true"
         android:theme="@style/Theme.RideShare"
         tools:targetApi="31">
@@ -26,9 +26,11 @@
         <activity android:name=".LoginActivity"
             android:exported="true" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".RideDetailsActivity"/>
-        <activity android:name=".SearchRidesActivity"/>
-        <activity android:name=".PostRideActivity"/>
+
+        <activity android:name=".PostRideActivity" />
+        <activity android:name=".RideDetailsActivity" />
+        <activity android:name=".SearchRidesActivity" />
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".DashboardActivity"></activity>
 
 
